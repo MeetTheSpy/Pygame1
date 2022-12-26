@@ -9,14 +9,6 @@ class Board:
         self.left = 10
         self.top = 10
         self.cell_size = 30
-        if a:
-            self.start(0)
-        else:
-            self.start()
-
-    def start(self, num):
-        if nu
-
 
     def set_view(self, left, top, cell_size):
         self.left = left
