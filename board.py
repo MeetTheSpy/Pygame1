@@ -8,7 +8,7 @@ class Board:
         self.board = [[0] * width for _ in range(height)]
         self.left = 10
         self.top = 10
-        self.cell_size = 30
+        self.cell_size = 3
 
     def set_view(self, left, top, cell_size):
         self.left = left
@@ -16,11 +16,25 @@ class Board:
         self.cell_size = cell_size
 
     def render(self, screen):
+        colors = ['black', 'red', 'yellow', 'blue', 'green', 'purple', 'pink']
         for i in range(self.height):
             for j in range(self.width):
                 pygame.draw.rect(screen, 'white',
                                  ((self.left + j * self.cell_size, self.top + i * self.cell_size),
                                  (self.cell_size, self.cell_size)), 1)
+                pygame.draw.rect(screen, colors[self.board[i][j]],
+                                 ((self.left + j * self.cell_size + 1, self.top + i * self.cell_size + 1),
+                                  (self.cell_size - 2, self.cell_size - 2)))
+
+    def load_level(filename):
+        filename = filename
+        with open(filename, 'r') as mapFile:
+            level_map = [line.strip() for line in mapFile]
+
+        max_width = max(map(len, level_map))
+
+        return list(map(lambda x: x.ljust(max_width, '.'), level_map))
+
 
 
 if __name__ == '__main__':
